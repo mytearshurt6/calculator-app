@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Calculator app</title>
+</head>
+
+<body class="theme-1">
+  <main class="calculator">
+    <header class="calc-header | text-top">
+      <h1 class="fs-heading">calc</h1>
+      <div class="theme-toggle fs-small-button" role="radiogroup" aria-label="Theme switch">
+        <h2 class="fs-toggle">THEME</h2>
+        <div class="theme-select-wrapper">
+          <div class="labels">
+            <label for="theme-1">1</label>
+            <label for="theme-2">2</label>
+            <label for="theme-3">3</label>
+          </div>
+          <div class="track">
+            <input type="radio" name="theme" id="theme-1" checked />
+            <input type="radio" name="theme" id="theme-2" />
+            <input type="radio" name="theme" id="theme-3" />
+            <div class="slider"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="calc-screen | bg-screen fs-display text-top padding-600 margin-block-start-500" role="region"
+      aria-label="Calculator display">
+      <output id="display">0</output>
+    </div>
+
+    <div class="keypad | fs-button padding-500 bg-toggle margin-block-start-400">
+      <button class="num-btn key | text-btn-main btn-seven key-light">7</button>
+      <button class="num-btn key | text-btn-main btn-eight key-light">8</button>
+      <button class="num-btn key | text-btn-main btn-nine key-light">9</button>
+      <button class="del-btn key | text-btn-secondary btn-del key-neutral fs-small-button">DEL</button>
+      <button class="num-btn key | text-btn-main btn-four key-light">4</button>
+      <button class="num-btn key | text-btn-main btn-five key-light">5</button>
+      <button class="num-btn key | text-btn-main btn-six key-light">6</button>
+      <button class="add-btn key | text-btn-main btn-plus key-light">+</button>
+      <button class="num-btn key | text-btn-main btn-one key-light">1</button>
+      <button class="num-btn key | text-btn-main btn-two key-light">2</button>
+      <button class="num-btn key | text-btn-main btn-three key-light">3</button>
+      <button class="substract-btn key | text-btn-main btn-minus key-light">-</button>
+      <button class="dot-btn key | text-btn-main btn-dot key-light">.</button>
+      <button class="num-btn key | text-btn-main btn-zero key-light">0</button>
+      <button class="divide-btn key | text-btn-main btn-divide key-light">/</button>
+      <button class="multiply-btn key | text-btn-main btn-multiply key-light">x</button>
+      <button class="reset-btn key | text-btn-secondary btn-reset key-neutral fs-small-button">RESET</button>
+      <button class="equal-btn key | text-btn-equal btn-equal key-accent fs-small-button">=</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
