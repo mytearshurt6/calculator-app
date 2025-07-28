@@ -13,38 +13,36 @@ const dotButton = document.querySelector('.dot-btn')
 
 const display = document.getElementById('display')
 
-for (let button of numberButtons) {
-  button.addEventListener('click', () => {
-    if (display.textContent === '0') {
-      display.textContent = button.textContent
-    } else if (
-      display.textContent
-        .split(/x-|\/-|[-+x/]/)
-        .pop()
-        .startsWith('0')
-    ) {
-      display.textContent = display.textContent.slice(0, -1) + button.textContent
-    } else {
-      display.textContent += button.textContent
-    }
-  })
+function handleInput(value) {
+  if (display.textContent === '0') {
+    display.textContent = value
+  } else if (
+    display.textContent
+      .split(/x-|\/-|[-+x/]/)
+      .pop()
+      .startsWith('0')
+  ) {
+    display.textContent = display.textContent.slice(0, -1) + value
+  } else {
+    display.textContent += value
+  }
 }
 
-deleteButton.addEventListener('click', () => {
+function handleDelete() {
   if (display.textContent !== '0' && display.textContent.length !== 1) {
     display.textContent = display.textContent.slice(0, -1)
   } else {
     display.textContent = '0'
   }
-})
+}
 
-resetButton.addEventListener('click', () => {
+function handleReset() {
   display.textContent = '0'
-})
+}
 
-addButton.addEventListener('click', () => {
+function handleAddition() {
   if (display.textContent === '-') {
-    return
+    display.textContent = '0'
   } else if (display.textContent.match(/(x-|\/-)$/)) {
     display.textContent = display.textContent.slice(0, -2) + '+'
   } else if (display.textContent.match(/[-x/]$/)) {
@@ -52,9 +50,9 @@ addButton.addEventListener('click', () => {
   } else if (display.textContent[display.textContent.length - 1] !== '+') {
     display.textContent += '+'
   }
-})
+}
 
-substractButton.addEventListener('click', () => {
+function handleSubstraction() {
   if (display.textContent === '0') {
     display.textContent = '-'
   } else if (display.textContent.match(/(x-|\/-)$/)) {
@@ -67,9 +65,9 @@ substractButton.addEventListener('click', () => {
   ) {
     display.textContent += '-'
   }
-})
+}
 
-multiplyButton.addEventListener('click', () => {
+function handleMultiplication() {
   if (display.textContent === '-') {
     return
   } else if (display.textContent.match(/(x-|\/-)$/)) {
@@ -79,9 +77,9 @@ multiplyButton.addEventListener('click', () => {
   } else if (display.textContent[display.textContent.length - 1] !== 'x') {
     display.textContent += 'x'
   }
-})
+}
 
-divideButton.addEventListener('click', () => {
+function handleDivision() {
   if (display.textContent === '-') {
     return
   } else if (display.textContent.match(/(x-|\/-)$/)) {
@@ -91,9 +89,22 @@ divideButton.addEventListener('click', () => {
   } else if (display.textContent[display.textContent.length - 1] !== '/') {
     display.textContent += '/'
   }
-})
+}
 
-equalButton.addEventListener('click', () => {
+function handleFractioning() {
+  if (display.textContent.match(/(x-|\/-|\+|-|\*|\/)$/)) {
+    display.textContent += '0.'
+  } else if (
+    !display.textContent
+      .split(/x-|\/-|[-+x/]/)
+      .pop()
+      .includes('.')
+  ) {
+    display.textContent += '.'
+  }
+}
+
+function handleEqual() {
   // Step 1: Parse tokens from display
   const numbers = display.textContent.split(/[+\-x\/]/)
   const operators = display.textContent.match(/[+\-x\/]/g)
@@ -173,18 +184,47 @@ equalButton.addEventListener('click', () => {
 
   // Step 6: Display result
   display.textContent = result
-})
+}
 
-dotButton.addEventListener('click', () => {
-  if (display.textContent.match(/(x-|\/-|\+|-|\*|\/)$/)) {
-    display.textContent += '0.'
-  } else if (
-    !display.textContent
-      .split(/x-|\/-|[-+x/]/)
-      .pop()
-      .includes('.')
-  ) {
-    display.textContent += '.'
+for (let button of numberButtons) {
+  button.addEventListener('click', () => handleInput(button.textContent))
+}
+
+deleteButton.addEventListener('click', () => handleDelete())
+
+resetButton.addEventListener('click', () => handleReset())
+
+addButton.addEventListener('click', () => handleAddition())
+
+substractButton.addEventListener('click', () => handleSubstraction())
+
+multiplyButton.addEventListener('click', () => handleMultiplication())
+
+divideButton.addEventListener('click', () => handleDivision())
+
+dotButton.addEventListener('click', () => handleFractioning())
+
+equalButton.addEventListener('click', () => handleEqual())
+
+document.addEventListener('keydown', (e) => {
+  if (/^\d$/.test(e.key)) {
+    handleInput(e.key)
+  } else if (e.key === 'Backspace') {
+    handleDelete()
+  } else if (e.key === 'Delete') {
+    handleReset()
+  } else if (e.key === '+') {
+    handleAddition()
+  } else if (e.key === '-') {
+    handleSubstraction()
+  } else if (e.key === 'x') {
+    handleMultiplication()
+  } else if (e.key === '/') {
+    handleDivision()
+  } else if (e.key === '=') {
+    handleEqual()
+  } else if (e.key === '.') {
+    handleFractioning()
   }
 })
 
